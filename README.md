@@ -75,32 +75,3 @@ Configure monitoring for IaaS/PaaS workloads with ARM
 ### [Open Source on Microsoft Azure Lab](./Labs/Open%20Source/)
 Implement CI and CD using open source technologies such as Docker and Jenkins
 
-# Suggested Itinerary
-
-|Day|Time           |Session Title                                     |Activity |Mins  |
-|:--|---------------|--------------------------------------------------|-----    |:-----|
-| 1 |08:00am - 09:00|[Introduction to DevOps](./Presentations/01_Introduction_to_DevOps.pptx?raw=1)                            |Lecture  |  60  |
-| 1 |09:00am - 10:00|[Infrastructure as Code](./Presentations/02_Infrastructure_as_Code.pptx?raw=1)                            |Lecture  |  60  |
-| 1 |10:00am - 10:15|Break                                             |Break    |  15  |
-| 1 |10:15am - 11:00|[Configuration Management](./Presentations/03_Configuration_Management.pptx?raw=1)                          |Lecture  |  45  |
-| 1 |11:00am - 12:00|[Configuration Management: Infrastructure Lab](./Labs/Configuration%20Management)      |Lab      |  60  |
-| 1 |11:00am - 12:00|[Desired State Configuration using Chef Server Lab](./Labs/DSC%20Using%20Chef%20Server) |Lab      |  30  |
-| 1 |12:00pm - 01:00|Lunch                                             |Lunch    |  60  |
-| 1 |01:00pm - 02:00|[Security for Modern Application](./Presentations/04_Security_for_Modern_Applications.pptx?raw=1)                   |Lecture  |  60  |
-| 1 |02:00pm - 03:00|[Continuous Integration](./Presentations/05_Continuous_Integration.pptx?raw=1)                            |Lecture  |  60  |
-| 1 |03:00pm - 03:15|Break                                             |Break    |  15  |
-| 1 |03:15pm - 04:15|[Automated Testing](./Presentations/06_Automated_Testing.pptx?raw=1)                                 |Lecture  |  60  |
-| 1 |04:15pm - 05:15|[Automated Testing + CI Lab](./Labs/Continous%20Integration)                       |Lab      |  60  |
-| 1 |05:15pm - 05:30|Open Panel                                        |Panel    |  15  |
-| 2 |08:00am - 09:00|[Release Management](./Presentations/07_Release_Management.pptx?raw=1)                                |Lecture  |  60  |
-| 2 |09:00am - 010:0|[Continuous Deployment](./Presentations/08_Continuous_Deployment.pptx?raw=1)                             |Lecture  |  60  |
-| 2 |10:00am - 10:15|Break                                             |Break    |  15  |
-| 2 |10:15am - 11:15|[Continuous Deployment Lab](./Labs/Continuous%20Deployment)                         |Lab      |  60  |
-| 2 |11:15am - 12:15|[Modern Application Monitoring](./Presentations/09_Modern_Application_Monitoring.pptx?raw=1)                     |Lecture  |  60  |
-| 2 |12:15pm - 01:15|Lunch                                             |Lunch    |  60  |
-| 2 |01:15pm - 02:15|[Modern Application Monitoring Lab](./Labs/Monitoring)                 |Lab      |  60  |
-| 2 |02:15pm - 03:15|[Open Source on Azure](./Presentations/10_Open_Source_on_Microsoft_Azure.pptx?raw=1)                    |Lecture  |  60  |
-| 2 |03:15pm - 03:30|Break                                             |Break    |  15  |
-| 2 |03:30pm - 04:30|[Open Source on Microsoft Azure Lab](./Labs/Open%20Source/)                |Lab      |  60  |
-| 2 |04:30pm - 05:15|[DevOps Landscape](./Presentations/11_DevOps_Landscape.pptx?raw=1)                                  |Lecture  |  45  |
-| 2 |05:15pm - 05:30|Open Panel                                        |Panel    |  15  |
