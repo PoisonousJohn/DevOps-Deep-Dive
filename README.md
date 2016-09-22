@@ -1,6 +1,6 @@
 # DevOps on Azure Workshop
 
-## A 2 day workshop covering how to perform DevOps related tasks in Azure. Consists of a combination of lectures and hands on labs demonstrating core concepts.
+## A workshop covering how to perform DevOps related tasks in Azure. Consists of a combination of lectures and hands on labs demonstrating core concepts.
 
 ## Learning Objectives
 * Perform Work Item Management in Visual Studio Team Services 
