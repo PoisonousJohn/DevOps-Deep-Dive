@@ -24,6 +24,7 @@ Understand why and how modern DevOps practices fit within the Microsoft Azure pl
 ### [Infrastructure as Code](./Presentations/02_Infrastructure_as_Code.pptx?raw=1)
 Understand how managing the provisioning of infrastructure is enhanced with Infrastructure as Code (IaC) concepts
 
+
 ### [Configuration Management](./Presentations/03_Configuration_Management.pptx?raw=1)
 Understand how to configure and manage the "inside" of environments
 
@@ -75,3 +76,5 @@ Configure monitoring for IaaS/PaaS workloads with ARM
 ### [Open Source on Microsoft Azure Lab](./Labs/Open%20Source/)
 Implement CI and CD using open source technologies such as Docker and Jenkins
 
+## Code of Conduct
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
