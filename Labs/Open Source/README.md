@@ -1,108 +1,113 @@
-# Open Source Lab Overview
+Оригинал: https://raw.githubusercontent.com/AzureCAT-GSI/DevOps-Deep-Dive/master/Labs/Open%20Source/README.md
 
-## Abstract
+# DevOps на OpenSource стеке
 
-During this lab, you will experience the continuous integration workflow of an open source practitioner. You will start by configuring a containerized Jenkins environment, and then building a simple Node.js using NPM and Gulp.
+## Краткое содержание
 
-## Learning Objectives
+В ходе лабороторной работы вы получите опыт выстраивания процессов continious integration с использованием open source инструментов. Вы начнете с конфигурации контейнеризованный среды Jenkins, а затем соберете простое Node.js приложение с помощью NPM и Gulp.
 
-After completing the exercises in this lab, you will be able to:
+## Цели
 
--   Deploy and configure a Jenkins environment
+После выполнения всех упражнений, вы сможете:
 
--   Utilize containerization in a DevOps workflow
+- Деплоить и настраивать Jenkins
+- Использовать контейнеризацию в процессах DevOps
+- Собирать опен сорсные Node.js приложения
 
--   Build an open source Node.js application
+**Примерное время выполнения лабораторной: *60* минут**
 
-**Estimated time to complete this lab: *60* minutes**
+# Задание : Поднять Jenkins
 
-# Exercise : Provision Jenkins
+## Сценарий
 
-## Scenario
+В ходе выполнения этого задания, вы поднимите сервер Jenkins, запущенный в Docker контейнере на виртуальной машине Ubuntu Linux в Azure.
 
-In this exercise, you will stand up a Jenkins server running in a Docker container hosted inside of an Ubuntu Linux virtual machine within Azure.
+После выполнения задания вы поймете:
 
-After completing this exercise, you will understand:
+-   Как создавать контейнеризированные сервера приложений на Linux.
+-   Как разворачивать и настраивать Jenkins server.
+-   Как использовать SSH для взаимодействия с Linux серверами.
 
--   How to create containerized application servers on Linux.
+## Разверните ресурсы с помощью ARM шаблона
 
--   How to deploy and configure a Jenkins server.
+1. Зайдите на портал Azure <http://portal.azure.com>.
 
--   How to interact with Linux environments over SSH.
-
-## Provision Resources via ARM Template
-
-1. Sign in to your Azure subscription at <http://portal.azure.com>.
-
-1. To use Jenkins inside of a Docker container, we need to setup a virtual machine with the Docker Engine installed. To save some time, we will use an Azure Resource Manager template. Navigate to the Azure Quickstart Template repository at
+1. Чтобы использовать Jenkins внутри Docker контейнера, нам нужно настроить виртуальную машину с предустановленным Docker Engine. Чтобы сэкономить время, мы будем использовать Azure Resource Manager (ARM) шаблон. Зайдите в репозиторий шаблонов
 
     <https://github.com/Azure/azure-quickstart-templates>.
 
-1. Locate the **docker-simple-on-ubuntu** folder and open it. This template will deploy all the necessary resources into our Azure subscription to enable Docker on Ubuntu.
+1. Найдите папку **docker-simple-on-ubuntu** и зайдите в нее. Этот шаблон развернет все необходимые ресурсы в вашей подписке, чтобы завести Docker на Ubuntu.
 
-1. Click **Deploy to Azure** to load the ARM template into the Azure Portal
+1. Нажмите **Deploy to Azure** чтобы загрузить ARM шаблон в портал Azure
 
     <https://github.com/Azure/azure-quickstart-templates/tree/master/docker-simple-on-ubuntu>.
 
     ![image](./media/image1.png)
 
-1. Complete the **Parameters** blade, provide a new Resource Group name and location, and approve the **Legal Terms** blade.
+1. Заполните все обязательные параметры:
+	- укажите имя и расположение новой Resource Group
+	- имя и пароль администратора виртуалки
+	- имя хранилища
+	- днс имя для публичногого IP адреса
+	- согласитесь с условиями использования **Legal Terms**.
 
-1. Click **Create** to begin provisioning the environment.
+1. Нажмите **Purchase** чтобы запустить разворачивание ресурсов.
 
-    Note: Take special note of the admin username and password; you will need them later.
+    > Заметка: Обязательно запомните имя администратора и пароль, они понадобятся вам позже.
 
     ![image](./media/image2.png)
 
-1. The provisioning process can last approximately 10 minutes. In the interim, we will install a tool that we will need: PuTTY. PuTTY is a free, simple SSH client for Windows that allow us to access our virtual machine. In the Windows world, we would use a Remote Desktop Connection; however, our Ubuntu Server image runs “headless” without a UI. Instead we will communicate with the server over the SSH protocol, and for that we need PuTTY. Browse to <http://www.putty.org/> and click **here**.
+1. Разворачивание ресурсов будет длится приблизительно 10 минут. Чтобы не терять время, установим утилиту, которая нам понадобится: PuTTY (*если вы Linux fan, вы и так знаете что делать, переходите к следующим шагам*).
+PuTTY это простой и бесплатный SSH клиент для Windows который позволит получить доступ к нашей виртуальной машине. В мире Windows, мы бы просто использовали Remote Desktop Connection, однако, наш Ubuntu Server запущен без графического интерфейса. Поэтому мы будет взаимодействовать с сервером через SSH протокол. для этого нам и понадобится PuTTY. Перейдите по ссылке <http://www.putty.org/> и нажмите **here**.
 
     ![image](./media/image3.png)
 
-1. Select **putty.exe** for Windows on Intel x86.
+1. Проще всего скачать непосредственно исполняемый файл. Например, putty.exe (the SSH and Telnet client itself) 64-bit.
 
     ![image](./media/image4.png)
 
-1. This small putty.exe file is all you need to open up a SSH connection to the virtual machine. Go back to the portal and wait for provisioning the complete.
+1. Этот маленький файл putty.exe &mdash; все что нужно, чтобы установить SSH соединение с виртуальной машиной. Вернитесь на портал и дождитесь, пока процесс развертывания ресурсов завершиться.
 
-1. Once the deployment is finished, navigate to the new Resource Group and open the virtual machine.
+1. Перейдите в созданную Resource Group и откройте виртуальную машину.
 
     ![image](./media/image5.png)
 
-1. In the **VM’s** blade, expand the **Essentials** section and copy the **Public IP address** for the machine.
+1. На карточке виртуальной машины, разверните секцию **Essentials** и скопируйте **Public IP address**.
 
     ![image](./media/image6.png)
 
-1. Open the PuTTY.exe.
+1. Откройте PuTTY.exe.
 
-1. In the **Host Name** field, paste the **Public IP Address**, and click **Open**.
+1. В поле **Host Name** вставьте значение **Public IP Address** и нажмите **Open**.
 
     ![image](./media/image7.png)
 
-1. Click **Yes** to accept the server’s host key into your registry.
+1. Нажмите **Yes** чтобы добавить ключ сервера в ваш реестр.
 
     ![image](./media/image8.png)
 
-1. Using the admin username and password from the **Parameter** blade, sign in to the virtual machine. A welcome screen with system information about your Ubuntu VM displays.
+1. Используя имя и пароль админа, которые вы указали при деплое ARM шаблона, войдите на виртуальную машину. Вы должны увидеть экран приветствия с системной информацией о вашей Ubuntu машине.
 
-1. At the prompt, enter **docker** and press enter.
+1. В командной строке введите **docker** и нажмите **enter**.
 
     ![image](./media/image9.png)
 
-1. The system will spit out confirming all of the various commands available with the Docker Engine. Enter **docker version** to see an example of interacting with the engine.
+1. Система выплюнет доку по докеру, подтверждая что Docker Engine уже установлен. Выполните команду **docker version** чтобы увидеть пример взаимодействия с Docker Engine.
 
     ![image](./media/image10.png)
 
-1. Now that we have an Ubuntu virtual machine setup with Docker installed, we need a Docker image. The Jenkins team publishes Docker images to the Docker Hub, located at <https://hub.docker.com/r/jenkinsci/jenkins/>.
+1. Теперь, когда у нас уже есть виртуалка с Ubuntu и установленным Docker Engine, нам нужен Docker образ. Команда Jenkins публикует свой Docker образ на Docker Hub:
+<https://hub.docker.com/r/jenkinsci/jenkins/>.
 
-1. To setup a container running the Jenkins image, execute **docker run -d -p 80:8080 jenkinsci/jenkins** in PuTTY. This command does several things:
+1. Чтобы настроить контейнер с образом Jenkins, выполните команду `docker run -d -p 80:8080 jenkinsci/jenkins`. Это команда делает несколько вещей:
 
-    - `docker run` sets up a new container
+    - `docker run` настраивает новый контейнер
 
-    - `-d` means run the container in daemon mode. It runs the container in the background instead of placing your command prompt directly into the new container.
+    - `-d` значит запустить в режиме демона (сервиса). Она запускает контейнер в фоне, вместо того, чтобы перекинуть вас в консоль контейнера.
 
-    - `-p 8080:8080` maps the container’s port to the VM’s port. It allows us to access Jenkins’ web interface from our regular machine, as Jenkins functions on port 801. By mapping it to the VM’s port 80, we can access our Public IP address without also having to specify a port number in the browser.
+    - `-p 80:8080` привязывает виртуальный порт контейнера к порту виртуальной машины. Это позволяет иметь доступ к веб-интерфейсу Jenkins с нашей собственной машины. Если мы привяжем порт контейнера к 80 порту виртуальной машины, мы сможем постучать по публичному IP адресу без указания порта в браузере.
 
-    - `jenkinsci/jenkins` is the name of the image. Since Docker cannot locate this image locally, it downloads the image from the Docker Hub and passes it along to be created into a new container.
+    - `jenkinsci/jenkins` &mdash; имя Docker образа. Так как Docker не может найти образ локально, он загружает образ с Docker Hub и передает его в созданный контейнер.
 
 1. A long alphanumeric string displays. The ID represents the new container. To get more information about all running containers, enter **docker ps**. Note the randomly generated **Names** value for your container, as we will use it shortly. In this example, the container’s name is **grave\_hopper**.
 
